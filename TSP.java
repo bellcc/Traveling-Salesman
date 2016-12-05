@@ -12,20 +12,9 @@ import java.util.Scanner;
 
 public class TSP
 {
-    public static int brute(String filename)
+   public static int greedy(Environment env, int start)
     {
-        Environment env = read(filename);
-
-        return 0;
-    }
-
-    public static int greedy(String filename)
-    {
-        Random rand = new Random();
-
-        Environment env = read(filename);
-
-        int node = rand.nextInt(env.dimension);
+        int node = start;
         env.visited[node] = 1;
 
         int i;
@@ -120,8 +109,30 @@ public class TSP
         }
 
         String name = args[0].substring(0, args[0].length() - 4);
+        
+        Environment env = read("assets/" + args[0]);
 
-        System.out.println(name + " Solution: " + greedy("assets/" + args[0]));
+        long startTime = System.nanoTime();
+    	
+    	int i;
+    	int min = Integer.MAX_VALUE;
+    	for(i=0;i<env.dimension;i++)
+    	{
+    		int value = greedy(env, i);
+    		
+    		if(value < min)
+    		{
+    			min = value;
+    		}
+    		
+    		env.init();
+    	}
+
+        long endTime = System.nanoTime();
+        double runTime = (endTime - startTime) * Math.pow(10, -9);
+
+		System.out.println(name  + " Solution: " + min);
+        System.out.println(name + " Runtime: " + runTime + " seconds");
     }
 }
 
@@ -147,7 +158,7 @@ class Environment
         init();
     }
 
-    private void init()
+    public void init()
     {
         int i;
         for(i=0;i<this.dimension;i++)
