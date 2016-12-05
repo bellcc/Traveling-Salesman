@@ -1,6 +1,8 @@
-#<p align = "center">SparkNotes: The Complete Edition</p>
+#<p align = "center">Traveling Salesman</p>
 
 Author: Chris Bell
+
+Purpose: CSE 464 - Project Part 4
 
 Description: This is a greedy solution to the Symmetric Travling Salesman problem. 
 
